@@ -1,0 +1,423 @@
+/* ========================================================================== */
+/* Base Styles                                                               */
+/* ========================================================================== */
+@font-face {
+    font-family: 'MonumentExtended';
+    src: 
+      url('assets/fonts/monumentextended/MonumentExtended-Regular.otf') format('opentype'),
+      url('assets/fonts/monumentextended/MonumentExtended-Regular.woff') format('woff'),
+      url('assets/fonts/monumentextended/MonumentExtended-Regular.woff2') format('woff2'),
+      url('assets/fonts/monumentextended/MonumentExtended-Ultrabold.otf') format('opentype'),
+      url('assets/fonts/monumentextended/MonumentExtended-Ultrabold.woff') format('woff'),
+      url('assets/fonts/monumentextended/MonumentExtended-Ultrabold.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+/* Define CSS variables for theme and colors */
+:root {
+    --primary-color: #000;
+    --daimonde-green: #4BFFA5;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+  
+    --font-Montserrat: "Montserrat", sans-serif;
+    --font-MonumentExtended: "MonumentExtended";
+    --txt-gray: #9F9F9F;
+    --txt-gray2: #BBB;
+
+}
+
+
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    background-color: var(--primary-color);
+    position: relative; /* The parent container should have position relative */
+}
+
+
+a {
+text-decoration: none;
+}
+  
+  
+/* ========================================================================== */
+/* Components                                                                */
+/* ========================================================================== */
+  
+  /* Buttons */
+
+  
+  
+/* ========================================================================== */
+/* Utility Classes                                                           */
+/* ========================================================================== */
+  
+
+.list-none{
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+}
+.cr_daimond_gr{
+    color: var(--daimonde-green) !important;
+}
+.bolder{
+    font-weight: 700 !important;
+}
+.primary_btn{
+    border: 1px solid rgba(119, 119, 125, 0.20);
+    background: var(--daimonde-green);
+    padding: 18px 25px;
+    /* txt */
+    color: var(--primary-color);
+    font-family: Poppins;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+}
+.primary_btnv2{
+    border: 0.5px solid #4C4C4C;
+    background: transparent;
+    padding: 18px 25px;
+    /* txt */
+    color: var(--light-color);
+    font-family: var(--font-MonumentExtended);
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+}
+/* ========================================================================== */
+/* HEADER                                                                    */
+/* ========================================================================== */
+.menu_conatiner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.menu_conatiner ul{
+    display: flex;
+    gap: 40px;
+}
+.menu_conatiner ul li a{
+    font-family: var(--font-Montserrat);
+    color: var(--txt-gray);
+    font-size: 16px;
+    font-weight: 700;
+}
+header{
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+}
+/* Toggle Button */
+.toggle_nav {
+    display: none;
+    font-size: 24px;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+/* ========================================================================== */
+/* HERO SECTION                                                               */
+/* ========================================================================== */
+.hero_section {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    min-height: 580px;
+    background-image: 
+        url('assets/images/Container.png'), /* Top image */
+        url('assets/images/Image.png');        /* Bottom image */
+    
+    /* Additional background properties for control */
+    background-size: cover, cover;        /* Ensures both images cover the section */
+    background-position: center, center;  /* Centers both images */
+    background-repeat: no-repeat, no-repeat; /* Prevents repetition of both images */
+    position: relative;
+}
+.bg_video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures proper scaling */
+    z-index: -1; /* Places it behind other elements */
+}
+
+.hero_content h1{
+    color: var(--light-color);
+    font-family: var(--font-MonumentExtended);
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 70px; /* 109.375% */
+    text-transform: uppercase;
+}
+.hero_content h1 span{
+    color: var(--daimonde-green);
+}
+.green_point{
+    width: 11.667px;
+    height: 11.667px;
+    background-color: var(--daimonde-green);
+    border-radius: 50%;
+    display: inline-block;
+
+}
+.hello{
+    color: var(--txt-gray);
+    font-family: Montserrat;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+}
+.aboutme_p{
+    color: #FFF;
+    font-family: var(--font-Montserrat);
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 30px; /* 150% */
+    margin-bottom: 0px;
+    max-width: 492px;
+}
+.contact_links{
+    color: var(--txt-gray2);
+    font-family: var(--font-Montserrat);
+    font-size: 0.8rem;;
+    font-style: normal;
+    font-weight: 400;
+}
+.contact_links_cnt{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: flex-end;
+}
+/* ========================================================================== */
+/* campanys i worked with                                                     */
+/* ========================================================================== */
+.section_title{
+    color: #FFF;
+    font-family: var(--font-MonumentExtended);
+    font-size: 34px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 57px; /* 167.647% */
+}
+.section_breaf{
+    color: #9F9F9F;
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 0px;
+}
+.Companys_content{
+    border-radius: 20px;
+    border-right: 1px solid #4BFFA5;
+    background: 
+    url('assets/images/Image.png'); 
+    background-size: cover;        /* Ensures both images cover the section */
+    background-position: center;  /* Centers both images */
+    background-repeat: no-repeat; /* Prevents repetition of both images */
+    box-shadow: 0px 0.362px 0.652px 0px rgba(255, 255, 255, 0.02) inset, 0px 3px 5.4px -1px rgba(255, 255, 255, 0.04) inset;
+}
+.swip_img_camp{
+    height: 35px;
+    width: auto;
+}
+.swiper-container , .swiper-wrapper{
+    overflow: hidden !important;
+    -webkit-transition-timing-function: linear !important;
+    -o-transition-timing-function: linear !important;
+    transition-timing-function: linear !important;
+}
+/* ========================================================================== */
+/* Works & Projects                                                           */
+/* ========================================================================== */
+.card_content{
+    border-radius: 16px;
+    border: 1px solid rgba(119, 119, 125, 0.20);
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.project_type{
+    color: #77777D;
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+}
+.project_title{
+    color: #CCC;
+    font-family: Poppins;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+}
+/* ========================================================================== */
+/* Contact                                                                    */
+/* ========================================================================== */
+.idea{
+    color: #FFF;
+    font-family: var(--font-MonumentExtended);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+}
+.contact_title{
+    color: #FFF;
+    font-family: var(--font-MonumentExtended);
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 57px; /* 118.75% */
+}
+.input_item{
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: var(--light-color);
+    border-bottom: 1px solid var(--light-color);
+
+    font-family: var(--font-Montserrat);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding: 8px 0px;
+}
+.input_item::placeholder {
+    color: var(--light-color); /* Change the placeholder color */
+    opacity: 1; /* Adjust the opacity to make the placeholder slightly transparent */
+    font-family: var(--font-Montserrat);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+}
+.form_item button{
+    background-color: transparent;
+    border: none;
+    color: var(--light-color); /* Change the placeholder color */
+    opacity: 1; /* Adjust the opacity to make the placeholder slightly transparent */
+    font-family: var(--font-Montserrat);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.primary_btnv3{
+    border: 1px solid rgba(119, 119, 125, 0.20);
+    background: var(--daimonde-green);
+    padding: 18px 60px;    /* txt */
+    color: var(--primary-color);
+    font-family: Poppins;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    border-radius: 15px;
+    width: fit-content;
+
+}
+/* ========================================================================== */
+/* FOOTER                                                                    */
+/* ========================================================================== */
+footer{
+    background-color: #FFF;
+}
+footer p{
+    color: #191B1C;
+    font-family: var(--font-MonumentExtended);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+}
+.footer_link{
+    line-height: 0px;
+    border: 1px solid black;
+    padding: 13px;
+    transition: all 0.5s ease;
+}
+.footer_link:hover{
+    background-color: #4BFFA5;
+}
+.copyright{
+    background-color: #191B1C;
+}
+.copyright p{
+    color: #FFF;
+    font-family: var(--font-MonumentExtended);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    margin-bottom: 0px;
+    text-align: center;
+}
+/* ========================================================================== */
+/* Media Queries                                                             */
+/* ========================================================================== */
+  
+@media (max-width: 1300px) {
+    .hero_content h1{
+        font-size: 55px;
+    }
+}
+/* Responsive */
+@media (max-width: 768px) {
+    .menu_conatiner {
+        display: block;
+        
+    }
+    .nav_links {
+        display: none;
+        flex-direction: column;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 100%;
+    }
+    .nav_links ul{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .nav_links.active {
+        display: flex;
+    }
+
+    .toggle_nav {
+        display: block;
+    }
+    .section_title {
+        font-size: 25px;
+    }
+    .section_breaf {
+        font-size: 13px;
+    }
+}
+@media (max-width: 991px) {
+    .hero_section {
+        min-height: 1058px;
+    }
+}
+@media (max-width: 500px) {
+    .hero_content h1 {
+        font-size: 38px;
+    }
+}
+
+
+  
