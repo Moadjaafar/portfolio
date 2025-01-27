@@ -37,7 +37,7 @@
 
 
 body {
-    background-color: var(--primary-color);
+    background-color: var(white);
     position: relative; /* The parent container should have position relative */
 }
 
@@ -143,28 +143,44 @@ header{
     background-position: center, center;  /* Centers both images */
     background-repeat: no-repeat, no-repeat; /* Prevents repetition of both images */
     position: relative;
+    clip-path: ellipse(132% 120% at 50% -20%);
 }
-.bg_video {
+
+  
+  .bg_video {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensures proper scaling */
-    z-index: -1; /* Places it behind other elements */
+    object-fit: cover;
+    z-index: -1;
+  }
+  
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgb(0 0 0 / 50%);
+    mix-blend-mode: inherit;
+    z-index: 1;
+  }
+.hero_content h1 span{
+    color: var(--daimonde-green);
 }
-
-.hero_content h1{
+.hero_content h1 {
     color: var(--light-color);
     font-family: var(--font-MonumentExtended);
     font-size: 64px;
     font-style: normal;
     font-weight: 400;
-    line-height: 70px; /* 109.375% */
+    line-height: 70px;
     text-transform: uppercase;
 }
-.hero_content h1 span{
-    color: var(--daimonde-green);
+.hero_content {
+    z-index: 4;
 }
 .green_point{
     width: 11.667px;
