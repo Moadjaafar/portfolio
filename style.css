@@ -47,7 +47,33 @@ body {
 a {
 text-decoration: none;
 }
-  
+  /* Works on Chrome, Edge, Safari */
+::-webkit-scrollbar {
+    width: 10px; /* Scrollbar width */
+}
+
+/* Track (background of scrollbar) */
+::-webkit-scrollbar-track {
+    background: #000000; /* Change to desired color */
+    border-radius: 10px; 
+}
+
+/* Scrollbar thumb (the moving part) */
+::-webkit-scrollbar-thumb {
+    background: #4BFFA5; /* Change to desired color */
+    border-radius: 10px;
+}
+
+/* Scrollbar thumb on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #00cc88; /* Darker color on hover */
+}
+
+/* For Firefox */
+* {
+    scrollbar-color: #4BFFA5 #000000; /* thumb color | track color */
+}
+
   
 /* ========================================================================== */
 /* Components                                                                */
