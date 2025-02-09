@@ -462,3 +462,35 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+// genrale magnatic 
+document.addEventListener("DOMContentLoaded", () => {
+    gsap.registerPlugin();
+
+    // Apply to all elements with class .magnatic
+    document.querySelectorAll(".magnatic__gn").forEach((btn) => {
+        // Mouse move event for magnetic effect
+        btn.addEventListener("mousemove", (e) => {
+            const { left, top, width, height } = btn.getBoundingClientRect();
+            const x = e.clientX - (left + width / 2); // X position of mouse relative to button center
+            const y = e.clientY - (top + height / 2);  // Y position of mouse relative to button center
+
+            // GSAP animation to move the button
+            gsap.to(btn, {
+                x: x * 0.5, // Multiply movement for magnetic effect
+                y: y * 0.5,
+                duration: 0.3, // Smooth movement
+                ease: "power3.out", // Easing function for smooth effect
+            });
+        });
+
+        // Mouse leave event to reset the button position
+        btn.addEventListener("mouseleave", () => {
+            gsap.to(btn, {
+                x: 0, // Reset to initial position
+                y: 0,
+                duration: 0.3, // Smooth reset
+                ease: "power3.out", // Easing function
+            });
+        });
+    });
+});
