@@ -418,8 +418,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const y = e.clientY - (top + height / 2);
 
             gsap.to(btn, {
-                x: x * 0.7,
-                y: y * 0.7,
+                x: x * 0.5,
+                y: y * 0.5,
                 duration: 0.3,
                 ease: "power3.out",
             });
@@ -429,7 +429,7 @@ document.addEventListener("DOMContentLoaded", () => {
             gsap.to(btn, {
                 x: 0,
                 y: 0,
-                duration: 0.9,
+                duration: 0.3,
                 ease: "power3.out",
             });
         });
@@ -445,8 +445,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const y = e.clientY - (top + height / 2);
 
             gsap.to(btn, {
-                x: x * 30.5,
-                y: y * 30.5,
+                x: x * 0.5,
+                y: y * 0.5,
                 duration: 0.3,
                 ease: "power3.out",
             });
