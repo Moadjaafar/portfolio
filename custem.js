@@ -494,3 +494,22 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+//bottom div footer 
+document.addEventListener("DOMContentLoaded", function () {
+    function adjustMarginBottom() {
+        const footer = document.querySelector("footer");
+        const section = document.querySelector(".prjects__cnt__project");
+
+        if (footer && section) {
+            const footerHeight = footer.offsetHeight;
+            section.style.marginBottom = `${footerHeight}px`;
+        }
+    }
+
+    // Run function initially
+    adjustMarginBottom();
+
+    // Adjust on window resize to keep it updated
+    window.addEventListener("resize", adjustMarginBottom);
+});
+
