@@ -414,13 +414,13 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".toggle_nav2").forEach((btn) => {
         btn.addEventListener("mousemove", (e) => {
             const { left, top, width, height } = btn.getBoundingClientRect();
-            const x = e.clientX - (left + width / 2);
-            const y = e.clientY - (top + height / 2);
+            const x = e.clientX - (left + width / 1);
+            const y = e.clientY - (top + height / 1);
 
             gsap.to(btn, {
-                x: x * 0.5,
-                y: y * 0.5,
-                duration: 0.3,
+                x: x * 40.7,
+                y: y * 40.7,
+                duration: 0.9,
                 ease: "power3.out",
             });
         });
@@ -429,7 +429,7 @@ document.addEventListener("DOMContentLoaded", () => {
             gsap.to(btn, {
                 x: 0,
                 y: 0,
-                duration: 0.3,
+                duration: 0.9,
                 ease: "power3.out",
             });
         });
@@ -445,8 +445,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const y = e.clientY - (top + height / 2);
 
             gsap.to(btn, {
-                x: x * 0.5,
-                y: y * 0.5,
+                x: x * 30.5,
+                y: y * 30.5,
                 duration: 0.3,
                 ease: "power3.out",
             });
@@ -498,8 +498,19 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", function () {
     function adjustMarginBottom() {
         const footer = document.querySelector("footer");
-        const section = document.querySelector(".prjects__cnt__project");
+        let section = document.querySelector(".prjects__cnt__project");
 
+        if (!section) return;
+
+        // Check window width and replace the section if it's less than 760px
+        if (window.innerWidth < 760) {
+            const newDiv = document.createElement("div");
+            newDiv.className = "Companys";
+            section.replaceWith(newDiv); // Replace the element
+            section = newDiv; // Update reference
+        }
+
+        // Adjust margin bottom
         if (footer && section) {
             const footerHeight = footer.offsetHeight;
             section.style.marginBottom = `${footerHeight}px`;
@@ -509,7 +520,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // Run function initially
     adjustMarginBottom();
 
-    // Adjust on window resize to keep it updated
+    // Adjust on window resize
     window.addEventListener("resize", adjustMarginBottom);
 });
+
 
