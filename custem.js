@@ -414,13 +414,13 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".toggle_nav2").forEach((btn) => {
         btn.addEventListener("mousemove", (e) => {
             const { left, top, width, height } = btn.getBoundingClientRect();
-            const x = e.clientX - (left + width / 1);
-            const y = e.clientY - (top + height / 1);
+            const x = e.clientX - (left + width / 2);
+            const y = e.clientY - (top + height / 2);
 
             gsap.to(btn, {
-                x: x * 40.7,
-                y: y * 40.7,
-                duration: 0.9,
+                x: x * 0.7,
+                y: y * 0.7,
+                duration: 0.3,
                 ease: "power3.out",
             });
         });
