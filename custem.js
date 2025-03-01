@@ -1,321 +1,209 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Define responsive breakpoints for different screen sizes
-    var breakpoints = {
-        xs: 0,      // Extra small devices (0px and up)
-        sm: 375,    // Small devices (375px and up), such as small mobile screens
-        md: 992,    // Medium devices (992px and up), typically tablets and small desktops
-        lg: 1199    // Large devices (1199px and up), for larger desktops
-    };
-    const swiper = new Swiper('.swip-campanys', {
-      // Optional parameters
-        spaceBetween: 10,
-        grabCursor: true,
-        a11y: true,
-        freeMode: true,
-        speed: 4000,
-        loop: true,
-        slidesPerView: 1,  // moad
-        slidesPerGroup: 1, // Number of slides per swipe
-        autoplay: {
-            delay: 0.5,
-            disableOnInteraction: false,
-        },
-        breakpoints: {
-            [breakpoints.xs]: {
-                slidesPerView: 5,
-                spaceBetween: 10,
-            },
-            [breakpoints.sm]: {
-                slidesPerView: 3,
-            },
-            [breakpoints.md]: {
-                slidesPerView: 3,
-            },
-            [breakpoints.lg]: {
-                slidesPerView: 5,
-            }
-        },
-    });
-    
-});
-
-
-// document.addEventListener("DOMContentLoaded", function () {
-//     const cursor = document.querySelector(".new_curser");
-//     const gallery = document.querySelector(".projects_gallery");
-//     const galleryImg = gallery.querySelector("img");
-//     const items = document.querySelectorAll(".project_iteme");
-//     const listContainer = document.querySelector(".list_projectitems");
-
-//     let lastY = 0; // Store the last Y position of the cursor
-
-//     // Mousemove handler
-//     function moveElements(e) {
-//         const currentY = e.clientY;
-//         const movingDown = currentY > lastY; // Determine if moving down or up
-//         lastY = currentY; // Update the lastY position
-
-//         // Move cursor
-//         gsap.to(cursor, {
-//             x: e.clientX,
-//             y: e.clientY,
-//             duration: 0.9,
-//             ease: "power2.out"
-//         });
-
-//         // Move gallery (centered with delay)
-//         gsap.to(gallery, {
-//             x: e.clientX, 
-//             y: e.clientY,
-//             duration: 1.9, 
-//             ease: "power3.out"
-//         });
-
-//         // Image change effect based on direction
-//         items.forEach((item) => {
-//             item.addEventListener("mouseenter", () => {
-//                 const newImgSrc = item.getAttribute("data-img");
-//                 const newBgColor = item.getAttribute("data-color") || "#fff"; // Default color if not provided
-//                 const projectType = item.getAttribute("project-type"); // Get the project type
-
-//                 // Check if the project type is "designe"
-//                 if (projectType === "designe") {
-//                     galleryImg.classList.add("design-class"); // Add the class if it's a "designe" project
-//                 } else {
-//                     galleryImg.classList.remove("design-class"); // Remove the class if it's not a "designe" project
-//                 }
-
-//                 // Slide out the old image (from opposite direction)
-//                 gsap.to(galleryImg, {
-//                     y: movingDown ? "100%" : "-100%", // If moving down, slide out from bottom, else top
-//                     opacity: 0,
-//                     duration: 0.3,
-//                     ease: "power3.in",
-//                     onComplete: () => {
-//                         // Change the image source
-//                         galleryImg.src = newImgSrc;
-//                         // Slide in the new image (from the direction of movement)
-//                         gsap.fromTo(galleryImg, {
-//                             y: movingDown ? "-100%" : "100%", // Slide from top or bottom based on movement
-//                             opacity: 0
-//                         }, {
-//                             y: "0", // Move to the center
-//                             opacity: 1,
-//                             duration: 0.3,
-//                             ease: "power3.out"
-//                         });
-//                     }
-//                 });
-
-//                 // Change background color
-//                 gsap.to(gallery, { backgroundColor: newBgColor, duration: 0.3 });
-//             });
-//         });
-//     }
-
-//     // Show on mouse enter
-//     listContainer.addEventListener("mouseenter", () => {
-//         gsap.to([cursor, gallery], { opacity: 1, scale: 1, duration: 0.3 });
-//         document.addEventListener("mousemove", moveElements);
+  // smouth scroll
+//   const lenis = new Lenis({
+//     duration: 1.5,
+//     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+//     direction: 'vertical',
+//     gestureDirection: 'vertical',
+//     smooth: true,
+//     smoothTouch: false,
+//     touchMultiplier: 2,
+//     infinite: false,
+//     mouseMultiplier: 2,
+//     smoothWheel: true,
+//     wheelMultiplier: 2,
+//     tablet: { smooth: false, breakpoint: 1024 },
+//     smartphone: { smooth: false, breakpoint: 768 }
+//   });
+//   let rafId;
+//   window.addEventListener('resize', () => {
+//     lenis.stop();
+//     clearTimeout(rafId);
+//     rafId = setTimeout(() => lenis.start(), 100);
+//   });
+//   function raf(time) {
+//     lenis.raf(time);
+//     requestAnimationFrame(raf);
+//   }
+//   requestAnimationFrame(raf);
+//   window.scrollTo(0, 0);
+//   window.scrollToLenis = (target) => {
+//     lenis.scrollTo(target, {
+//       offset: 0,
+//       immediate: false,
+//       duration: 1.5,
+//       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
 //     });
-
-//     // Hide on mouse leave
-//     listContainer.addEventListener("mouseleave", () => {
-//         gsap.to([cursor, gallery], { opacity: 0, scale: 0.5, duration: 0.3 });
-//         document.removeEventListener("mousemove", moveElements);
-//     });
-// });
+//   };
+//   window.stopLenis = () => lenis.stop();
+//   window.startLenis = () => lenis.start();
 
 document.addEventListener("DOMContentLoaded", function () {
     const cursor = document.querySelector(".new_curser");
     const gallery = document.querySelector(".projects_gallery");
-    const galleryImg = gallery.querySelector("img");
+    // Only query for an image if the gallery exists.
+    const galleryImg = gallery ? gallery.querySelector("img") : null;
     const items = document.querySelectorAll(".project_iteme");
     const listContainer = document.querySelector(".list_projectitems");
-
+  
     let lastY = 0;
     let lastX = 0;
     let ticking = false; // To throttle `mousemove` events
-
+  
     // Move Elements (Throttled)
     function moveElements(e) {
-        if (!ticking) {
-            requestAnimationFrame(() => {
-                const currentY = e.clientY;
-                const movingDown = currentY > lastY;
-                lastY = currentY;
-                lastX = e.clientX;
-
-                // Cursor animation
-                gsap.to(cursor, {
-                    x: lastX,
-                    y: lastY,
-                    duration: 0.6,
-                    ease: "power2.out"
-                });
-
-                // Gallery movement (delayed for smoothness)
-                gsap.to(gallery, {
-                    x: lastX, 
-                    y: lastY,
-                    duration: 1.2, 
-                    ease: "power3.out"
-                });
-
-                ticking = false; // Allow the next frame update
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const currentY = e.clientY;
+          lastY = currentY;
+          lastX = e.clientX;
+  
+          // Animate the cursor if it exists.
+          if (cursor) {
+            gsap.to(cursor, {
+              x: lastX,
+              y: lastY,
+              duration: 0.6,
+              ease: "power2.out"
             });
-            ticking = true;
-        }
-    }
-
-    // Change Image & Background on Hover
-    items.forEach((item) => {
-        item.addEventListener("mouseenter", () => {
-            const newImgSrc = item.getAttribute("data-img");
-            const newBgColor = item.getAttribute("data-color") || "#fff";
-            const projectType = item.getAttribute("project-type");
-
-            // Optimize image swap: Only update if necessary
-            if (galleryImg.src !== newImgSrc) {
-                gsap.to(galleryImg, {
-                    y: lastY > window.innerHeight / 2 ? "100%" : "-100%",
-                    opacity: 0,
-                    duration: 0.3,
-                    ease: "power3.in",
-                    onComplete: () => {
-                        galleryImg.src = newImgSrc;
-                        gsap.fromTo(galleryImg, { y: "-100%", opacity: 0 }, { y: "0", opacity: 1, duration: 0.3, ease: "power3.out" });
-                    }
-                });
-            }
-
-            // Optimize background color change: Only update if different
-            if (gallery.style.backgroundColor !== newBgColor) {
-                gsap.to(gallery, { backgroundColor: newBgColor, duration: 0.3 });
-            }
-
-            // Toggle class efficiently
-            galleryImg.classList.toggle("design-class", projectType === "designe");
+          }
+  
+          // Animate the gallery if it exists.
+          if (gallery) {
+            gsap.to(gallery, {
+              x: lastX,
+              y: lastY,
+              duration: 1.2,
+              ease: "power3.out"
+            });
+          }
+  
+          ticking = false; // Allow the next frame update
         });
+        ticking = true;
+      }
+    }
+  
+    // Change Image & Background on Hover for each project item
+    items.forEach((item) => {
+      item.addEventListener("mouseenter", () => {
+        const newImgSrc = item.getAttribute("data-img");
+        const newBgColor = item.getAttribute("data-color") || "#fff";
+        const projectType = item.getAttribute("project-type");
+  
+        if (galleryImg && gallery) {
+          // Optimize image swap: Only update if necessary
+          if (galleryImg.src !== newImgSrc) {
+            gsap.to(galleryImg, {
+              y: lastY > window.innerHeight / 2 ? "100%" : "-100%",
+              opacity: 0,
+              duration: 0.3,
+              ease: "power3.in",
+              onComplete: () => {
+                galleryImg.src = newImgSrc;
+                gsap.fromTo(
+                  galleryImg,
+                  { y: "-100%", opacity: 0 },
+                  { y: "0", opacity: 1, duration: 0.3, ease: "power3.out" }
+                );
+              }
+            });
+          }
+  
+          // Optimize background color change: Only update if different
+          if (gallery.style.backgroundColor !== newBgColor) {
+            gsap.to(gallery, { backgroundColor: newBgColor, duration: 0.3 });
+          }
+        }
+  
+        // Toggle class efficiently on the image if it exists.
+        if (galleryImg) {
+          galleryImg.classList.toggle("design-class", projectType === "designe");
+        }
+      });
     });
-
-    // Show Elements on Hover
-    listContainer.addEventListener("mouseenter", () => {
-        gsap.to([cursor, gallery], { opacity: 1, scale: 1, duration: 0.3 });
+  
+    // Attach events for showing/hiding elements, only if the list container exists.
+    if (listContainer) {
+      listContainer.addEventListener("mouseenter", () => {
+        if (cursor && gallery) {
+          gsap.to([cursor, gallery], { opacity: 1, scale: 1, duration: 0.3 });
+        }
         document.addEventListener("mousemove", moveElements);
-    });
-
-    // Hide Elements on Mouse Leave
-    listContainer.addEventListener("mouseleave", () => {
-        gsap.to([cursor, gallery], { opacity: 0, scale: 0.5, duration: 0.3 });
+      });
+  
+      listContainer.addEventListener("mouseleave", () => {
+        if (cursor && gallery) {
+          gsap.to([cursor, gallery], { opacity: 0, scale: 0.5, duration: 0.3 });
+        }
         document.removeEventListener("mousemove", moveElements);
-    });
+      });
+    }
 });
+  
 document.addEventListener("DOMContentLoaded", function () {
     const rightContainer = document.querySelector(".swipe_right__project");
     const leftContainer = document.querySelector(".swipe_left__project");
     const projectItems = document.querySelectorAll(".project_iteme__galry");
-
+  
+    // Check if essential elements exist before proceeding
+    if (!rightContainer || !leftContainer) {
+      console.log("One or both swipe container elements are missing.");
+      return;
+    }
+  
     let translateXRight = -190; // Start slightly off-screen
-    let translateXLeft = -150; // Start slightly off-screen
+    let translateXLeft = -150;  // Start slightly off-screen
     let scrollSpeed = 0.5;
     let animationActive = false;
-
+  
     // Apply initial positioning using CSS transform
     rightContainer.style.transform = `translateX(${translateXRight}px)`;
     leftContainer.style.transform = `translateX(${translateXLeft}px)`;
-
-    // Intersection Observer to check visibility
-    const observer = new IntersectionObserver((entries) => {
+  
+    // Check if there are any project items before setting up the observer
+    if (projectItems && projectItems.length > 0) {
+      // Intersection Observer to check visibility
+      const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                animationActive = true; // Start animation when an item is visible
-            }
+          if (entry.isIntersecting) {
+            animationActive = true; // Start animation when an item is visible
+          }
         });
-    }, { threshold: 0.2 });
-
-    projectItems.forEach(item => observer.observe(item));
-
+      }, { threshold: 0.2 });
+  
+      projectItems.forEach(item => observer.observe(item));
+    } else {
+      console.warn("No project items found to observe.");
+    }
+  
     // Scroll event listener
     window.addEventListener("wheel", function (event) {
-        if (!animationActive) return;
-
-        if (event.deltaY > 0) {
-            translateXRight -= scrollSpeed;
-            translateXLeft += scrollSpeed;
-        } else {
-            translateXRight += scrollSpeed;
-            translateXLeft -= scrollSpeed;
-        }
-
-        rightContainer.style.transform = `translateX(${translateXRight}px)`;
-        leftContainer.style.transform = `translateX(${translateXLeft}px)`;
+      if (!animationActive) return;
+  
+      if (event.deltaY > 0) {
+        translateXRight -= scrollSpeed;
+        translateXLeft += scrollSpeed;
+      } else {
+        translateXRight += scrollSpeed;
+        translateXLeft -= scrollSpeed;
+      }
+  
+      rightContainer.style.transform = `translateX(${translateXRight}px)`;
+      leftContainer.style.transform = `translateX(${translateXLeft}px)`;
     });
 });
-
-
-
-// Select the button element from the document
-// const button = document.querySelector('.magnatic');
-
-// // Get the button's bounding rectangle dimensions and position
-// let boundingRect = button.getBoundingClientRect();
-
-// // Add an event listener to the window to update the bounding rectangle dimensions
-// // when the window is resized
-// window.addEventListener('resize', () => {
-//   boundingRect = button.getBoundingClientRect();
-// });
-
-// // Add an event listener for mouse movement over the button
-// button.addEventListener('mousemove', (e) => {
-//   // Calculate mouse position relative to the button
-//   const mousePosX = e.x - boundingRect.left; // X position
-//   const mousePosY = e.y - boundingRect.top;  // Y position
   
-//   // Use GSAP (GreenSock Animation Platform) to animate the button
-//   // This creates a 'magnetic' effect where the button moves towards the mouse
-//   gsap.to(button, {
-//     x: (mousePosX - boundingRect.width / 30) * 0.2, // Move horizontally towards mouse
-//     y: (mousePosY - boundingRect.height / 30) * 0.2, // Move vertically towards mouse
-//     duration: 0.8, // Duration of the animation
-//     ease: 'power3.out', // Easing function for smooth animation
-//   });
-// });
-
-// // Add an event listener for when the mouse leaves the button area
-// button.addEventListener('mouseleave', () => {
-//   // Animate the button back to its original position
-//   gsap.to(button, {
-//     x: 0, // Reset horizontal position
-//     y: 0, // Reset vertical position
-//     duration: 0.8, // Duration of the animation
-//     ease: 'elastic.out(1,0.3)' // Easing function for a 'springy' return
-//   });
-// });
-
-
-// document.getElementById("toggle-btn").addEventListener("click", function() {
-//     const nav = document.querySelector(".nav_mobile");
-    
-//     // Check if the menu is currently off-screen
-//     if (nav.style.right === "-100%" || nav.style.right === "") {
-//         nav.style.right = "0"; // Slide in
-//     } else {
-//         nav.style.right = "-100%"; // Slide out
-//     }
-// });
-
-// Get elements
 // Get all toggle buttons
 const toggleButtons = document.querySelectorAll('.toggle-btn');
 const navMobile = document.querySelector('.nav_mobile');
 const overlay = document.querySelector('.overlay2');
 
-// Function to toggle nav and overlay
 function toggleNav() {
     navMobile.classList.toggle('active');
     overlay.classList.toggle('active');
+    
+    // Toggle class to change the button into "X"
+    this.classList.toggle('open');
 }
 
 // Add event listener to each toggle button
@@ -323,89 +211,82 @@ toggleButtons.forEach(button => {
     button.addEventListener('click', toggleNav);
 });
 
-// Close the nav and overlay when overlay is clicked
+// Close nav when clicking on overlay
 overlay.addEventListener('click', () => {
     navMobile.classList.remove('active');
     overlay.classList.remove('active');
+    
+    // Ensure all buttons revert back
+    toggleButtons.forEach(button => button.classList.remove('open'));
 });
 
+
 // animation H1
-document.addEventListener("DOMContentLoaded", function () {
-    new Typed("#typed-text", {
-      strings: ["graphic designer", "UI/UX Designer", "Creative"], // Change these as needed
-      typeSpeed: 100, // Speed of typing
-      backSpeed: 50, // Speed of deleting
-      backDelay: 1500, // Delay before deleting
-      loop: true, // Keep looping
-      showCursor: true, // Show the blinking cursor
-    });
-  });
-
-
-  // smouth scroll
-  const lenis = new Lenis({
-    duration: 1.5,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    direction: 'vertical',
-    gestureDirection: 'vertical',
-    smooth: true,
-    smoothTouch: false,
-    touchMultiplier: 2,
-    infinite: false,
-    mouseMultiplier: 2,
-    smoothWheel: true,
-    wheelMultiplier: 2,
-    tablet: { smooth: false, breakpoint: 1024 },
-    smartphone: { smooth: false, breakpoint: 768 }
-  });
-  let rafId;
-  window.addEventListener('resize', () => {
-    lenis.stop();
-    clearTimeout(rafId);
-    rafId = setTimeout(() => lenis.start(), 100);
-  });
-  function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-  }
-  requestAnimationFrame(raf);
-  window.scrollTo(0, 0);
-  window.scrollToLenis = (target) => {
-    lenis.scrollTo(target, {
-      offset: 0,
-      immediate: false,
-      duration: 1.5,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
-    });
-  };
-  window.stopLenis = () => lenis.stop();
-  window.startLenis = () => lenis.start();
+document.addEventListener("DOMContentLoaded", function () { 
+    const typedEl = document.querySelector("#typed-text");
+    if (typedEl) {
+      new Typed("#typed-text", {
+        strings: ["graphic designer", "UI/UX Designer", "Creative"], // Change these as needed
+        typeSpeed: 100, // Speed of typing
+        backSpeed: 50, // Speed of deleting
+        backDelay: 1500, // Delay before deleting
+        loop: true, // Keep looping
+        showCursor: true, // Show the blinking cursor
+      });
+    } else {
+      console.warn('Element with ID "#typed-text" was not found.');
+    }
+});
+  
 
 // toggel nav 
 document.addEventListener("DOMContentLoaded", () => {
     const toggleBtn = document.querySelector(".toggle_nav2");
     const targetSection = document.querySelector(".hero_section");
-
-    // Ensure button starts hidden
-    toggleBtn.classList.add("hidden");
-
-    const observer = new IntersectionObserver(
-        (entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    toggleBtn.classList.remove("hidden"); // Hide when in view
-                } else {
-                    toggleBtn.classList.add("hidden"); // Show when out of view
-                }
-            });
-        },
-        { threshold: 0.5 } // Adjust to trigger at 50% visibility
-    );
-
+  
+    // Check if toggleBtn exists before proceeding
+    if (!toggleBtn) {
+      console.warn('Element with class ".toggle_nav2" not found.');
+      return;
+    }
+  
+    // Initial state: adjust based on current scroll position (fallback logic)
+    if (window.scrollY > 500) {
+      toggleBtn.classList.add("show");
+    } else {
+      toggleBtn.classList.remove("show");
+    }
+  
+    // If the hero_section exists, use IntersectionObserver
     if (targetSection) {
-        observer.observe(targetSection);
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            // When the target section is at least 50% visible, hide the button.
+            // Otherwise, show the button.
+            if (entry.isIntersecting) {
+              toggleBtn.classList.remove("show");
+            } else {
+              toggleBtn.classList.add("show");
+            }
+          });
+        },
+        { threshold: 0.5 } // Trigger when 50% of targetSection is visible
+      );
+      observer.observe(targetSection);
+    } else {
+      // Fallback: if targetSection doesn't exist, show/hide button based on scroll position
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 500) {
+          toggleBtn.classList.add("show");
+        } else {
+          toggleBtn.classList.remove("show");
+        }
+      });
     }
 });
+  
+  
 // magnatic 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -495,33 +376,157 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 //bottom div footer 
-document.addEventListener("DOMContentLoaded", function () {
-    function adjustMarginBottom() {
-        const footer = document.querySelector("footer");
-        let section = document.querySelector(".prjects__cnt__project");
 
-        if (!section) return;
-
-        // Check window width and replace the section if it's less than 760px
-        if (window.innerWidth < 760) {
-            const newDiv = document.createElement("div");
-            newDiv.className = "Companys";
-            section.replaceWith(newDiv); // Replace the element
-            section = newDiv; // Update reference
+//--------------splid swiper
+document.addEventListener('DOMContentLoaded', function () {
+    const phoneSliderEl = document.querySelector('#phone-slider');
+    if (phoneSliderEl) {
+      new Splide('#phone-slider', {
+        type: 'slide',
+        perPage: 3,
+        perMove: 1,
+        gap: '5rem',
+        breakpoints: {
+            1200: { perPage: 3, gap: '4rem' },
+            992:  { perPage: 2, gap: '3rem' },
+            768: { perPage: 1 }
         }
+      }).mount();
+    } else {
+      console.warn('Element with ID "#phone-slider" was not found.');
+    }
+  });
+  
+function initScrollTriggers() {
+    // Check if GSAP and ScrollTrigger are loaded
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+      console.warn('GSAP or ScrollTrigger is not loaded.');
+      return;
+    }
+  
+    // Check if the footer container exists
+    const footerContainer = document.querySelector('.footer-container');
+    if (!footerContainer) {
+      console.warn('Element with class ".footer-container" not found.');
+      return;
+    }
+  
+    // Set initial state of the footer container
+    gsap.set(footerContainer, { yPercent: -50 });
+  
+    // Create the timeline for the uncover animation
+    const uncover = gsap.timeline({ paused: true });
+    uncover.to(footerContainer, { yPercent: 0, ease: 'none' });
+  
+    // Check if the trigger element (main) exists
+    const mainElement = document.querySelector('main');
+    if (!mainElement) {
+      console.warn('Main element not found.');
+      return;
+    }
+  
+    // Create the ScrollTrigger instance
+    ScrollTrigger.create({
+      trigger: mainElement,
+      // markers: true,
+      start: 'bottom bottom',
+      end: '+=95%',
+      animation: uncover,
+      scrub: true,
+    });
+  
+// Optionally restart the animation if needed:
+// uncover.restart();
+}
 
-        // Adjust margin bottom
-        if (footer && section) {
-            const footerHeight = footer.offsetHeight;
-            section.style.marginBottom = `${footerHeight}px`;
-        }
+initScrollTriggers();
+
+// FOOTER ANIMATIONS 
+document.addEventListener("DOMContentLoaded", () => {
+    // Check that GSAP and ScrollTrigger are loaded
+    if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") {
+      console.warn("GSAP or ScrollTrigger is not loaded.");
+      return;
+    }
+    
+    // Select the elements: your rounded footer and the footer itself as trigger
+    const roundedFooter = document.querySelector(".rounded_footer");
+    const footer = document.querySelector("footer");
+    
+    if (!roundedFooter) {
+      console.warn("Element with class '.rounded_footer' not found.");
+      return;
+    }
+    
+    if (!footer) {
+      console.warn("Footer element not found.");
+      return;
+    }
+    
+    // Define the maximum (grown) height you want for the element
+    const grownHeight = 150; // Adjust this value as needed
+    
+    // Set the initial state of the rounded footer (grown height)
+    gsap.set(roundedFooter, { height: grownHeight });
+    
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: footer,
+        start: "top bottom",  // when the top of the footer enters the bottom of the viewport
+        end: "bottom top",    // when the bottom of the footer leaves the top of the viewport
+        scrub: 0.5,             // smooth transition over 2 seconds (adjust as needed)
+        markers: false,        // enable markers for debugging; remove or set to false in production
+      }
+    });
+    
+    tl.to(roundedFooter, { height: 0, ease: "power2.out" })
+      .to(roundedFooter, { height: grownHeight, ease: "power2.out" });
+      // Function to update the translateY based on the current height of rounded_footer
+  });
+  
+  document.addEventListener("DOMContentLoaded", function () {
+    const videos = document.querySelectorAll("video");
+
+    if (videos.length === 0) {
+        console.warn("No videos found on the page.");
+        return;
     }
 
-    // Run function initially
-    adjustMarginBottom();
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.play();
+            } else {
+                entry.target.pause();
+            }
+        });
+    }, { threshold: 0.5 }); // Video plays when 50% is visible
 
-    // Adjust on window resize
-    window.addEventListener("resize", adjustMarginBottom);
+    videos.forEach(video => observer.observe(video));
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+    gsap.registerPlugin(ScrollTrigger);
 
+    document.querySelectorAll(".mouv-xy").forEach((el) => {
+        let lastScrollTop = window.scrollY;
+
+        ScrollTrigger.create({
+            trigger: el,
+            start: "top bottom", // Start animation when the element enters the viewport
+            end: "bottom top", // Stop when the element leaves the viewport
+            onUpdate: (self) => {
+                let currentScrollTop = window.scrollY;
+                let scrollDirection = currentScrollTop > lastScrollTop ? -1 : 1; // 1 = scrolling down, -1 = scrolling up
+                lastScrollTop = currentScrollTop;
+
+                gsap.to(el, {
+                    y: `+=${1.5 * scrollDirection}`, // Move 5px up or down
+                    duration: 0.3,
+                    ease: "power2.out"
+                });
+            }
+        });
+    });
+});
