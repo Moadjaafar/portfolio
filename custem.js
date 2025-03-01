@@ -1,41 +1,41 @@
   // smouth scroll
-//   const lenis = new Lenis({
-//     duration: 1.5,
-//     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-//     direction: 'vertical',
-//     gestureDirection: 'vertical',
-//     smooth: true,
-//     smoothTouch: false,
-//     touchMultiplier: 2,
-//     infinite: false,
-//     mouseMultiplier: 2,
-//     smoothWheel: true,
-//     wheelMultiplier: 2,
-//     tablet: { smooth: false, breakpoint: 1024 },
-//     smartphone: { smooth: false, breakpoint: 768 }
-//   });
-//   let rafId;
-//   window.addEventListener('resize', () => {
-//     lenis.stop();
-//     clearTimeout(rafId);
-//     rafId = setTimeout(() => lenis.start(), 100);
-//   });
-//   function raf(time) {
-//     lenis.raf(time);
-//     requestAnimationFrame(raf);
-//   }
-//   requestAnimationFrame(raf);
-//   window.scrollTo(0, 0);
-//   window.scrollToLenis = (target) => {
-//     lenis.scrollTo(target, {
-//       offset: 0,
-//       immediate: false,
-//       duration: 1.5,
-//       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
-//     });
-//   };
-//   window.stopLenis = () => lenis.stop();
-//   window.startLenis = () => lenis.start();
+  const lenis = new Lenis({
+    duration: 1.5,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    direction: 'vertical',
+    gestureDirection: 'vertical',
+    smooth: true,
+    smoothTouch: false,
+    touchMultiplier: 2,
+    infinite: false,
+    mouseMultiplier: 2,
+    smoothWheel: true,
+    wheelMultiplier: 2,
+    tablet: { smooth: false, breakpoint: 1024 },
+    smartphone: { smooth: false, breakpoint: 768 }
+  });
+  let rafId;
+  window.addEventListener('resize', () => {
+    lenis.stop();
+    clearTimeout(rafId);
+    rafId = setTimeout(() => lenis.start(), 100);
+  });
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
+  window.scrollTo(0, 0);
+  window.scrollToLenis = (target) => {
+    lenis.scrollTo(target, {
+      offset: 0,
+      immediate: false,
+      duration: 1.5,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+    });
+  };
+  window.stopLenis = () => lenis.stop();
+  window.startLenis = () => lenis.start();
 
 document.addEventListener("DOMContentLoaded", function () {
     const cursor = document.querySelector(".new_curser");
