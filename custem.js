@@ -38,6 +38,10 @@
   window.startLenis = () => lenis.start();
 
 document.addEventListener("DOMContentLoaded", function () {
+     // Only run animations if the viewport width is 767px or more
+    if (window.innerWidth < 767) {
+        return;
+    }
     const cursor = document.querySelector(".new_curser");
     const gallery = document.querySelector(".projects_gallery");
     // Only query for an image if the gallery exists.
@@ -143,53 +147,20 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
     const rightContainer = document.querySelector(".swipe_right__project");
     const leftContainer = document.querySelector(".swipe_left__project");
-    const projectItems = document.querySelectorAll(".project_iteme__galry");
-  
-    // Check if essential elements exist before proceeding
-    if (!rightContainer || !leftContainer) {
-      console.log("One or both swipe container elements are missing.");
-      return;
-    }
-  
-    let translateXRight = -190; // Start slightly off-screen
-    let translateXLeft = -150;  // Start slightly off-screen
-    let scrollSpeed = 0.5;
-    let animationActive = false;
-  
-    // Apply initial positioning using CSS transform
-    rightContainer.style.transform = `translateX(${translateXRight}px)`;
-    leftContainer.style.transform = `translateX(${translateXLeft}px)`;
-  
-    // Check if there are any project items before setting up the observer
-    if (projectItems && projectItems.length > 0) {
-      // Intersection Observer to check visibility
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            animationActive = true; // Start animation when an item is visible
-          }
-        });
-      }, { threshold: 0.2 });
-  
-      projectItems.forEach(item => observer.observe(item));
-    } else {
-      console.warn("No project items found to observe.");
-    }
-  
-    // Scroll event listener
-    window.addEventListener("wheel", function (event) {
-      if (!animationActive) return;
-  
+    
+    // Set initial positions
+    gsap.set(rightContainer, { x: -190 });
+    gsap.set(leftContainer, { x: -150 });
+    
+    // Scroll listener
+    window.addEventListener("wheel", function(event) {
       if (event.deltaY > 0) {
-        translateXRight -= scrollSpeed;
-        translateXLeft += scrollSpeed;
+        gsap.to(rightContainer, { x: "-=9", ease: "power2.out" });
+        gsap.to(leftContainer, { x: "+=9", ease: "power2.out" });
       } else {
-        translateXRight += scrollSpeed;
-        translateXLeft -= scrollSpeed;
+        gsap.to(rightContainer, { x: "+=9", ease: "power2.out" });
+        gsap.to(leftContainer, { x: "-=9", ease: "power2.out" });
       }
-  
-      rightContainer.style.transform = `translateX(${translateXRight}px)`;
-      leftContainer.style.transform = `translateX(${translateXLeft}px)`;
     });
 });
   
@@ -197,13 +168,19 @@ document.addEventListener("DOMContentLoaded", function () {
 const toggleButtons = document.querySelectorAll('.toggle-btn');
 const navMobile = document.querySelector('.nav_mobile');
 const overlay = document.querySelector('.overlay2');
+const toggleBtn = document.querySelector(".toggle_nav2");
 
 function toggleNav() {
     navMobile.classList.toggle('active');
     overlay.classList.toggle('active');
-    
+    toggleBtn.classList.add("show");
+    // Check if navMobile is active, then update toggleBtn
+    if (navMobile.classList.contains('active')) {
+        toggleBtn.classList.add('open');
+    } else {
+        toggleBtn.classList.remove('open');
+    }
     // Toggle class to change the button into "X"
-    this.classList.toggle('open');
 }
 
 // Add event listener to each toggle button
@@ -505,7 +482,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     videos.forEach(video => observer.observe(video));
 });
-
 document.addEventListener("DOMContentLoaded", function () {
     gsap.registerPlugin(ScrollTrigger);
 
@@ -530,3 +506,108 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+document.addEventListener('DOMContentLoaded', function() {
+    function initButtonAnimation(selector, options) {
+      const buttons = document.querySelectorAll(selector);
+      
+      buttons.forEach(button => {
+        let circle = document.createElement('div');
+        circle.classList.add('circle');
+        button.appendChild(circle);
+        
+        let isAnimating = false;
+        let enterAnimationCompleted = false;
+        let pendingReset = false;
+        
+        function completeEnterAnimation() {
+          enterAnimationCompleted = true;
+          if (pendingReset) {
+            resetAnimation();
+          }
+        }
+        
+        function resetAnimation() {
+          // Reset button text color to its default
+          button.style.transition = 'color 0.4s ease';
+          button.style.color = options.defaultTextColor;
+          
+          // Fade out the circle
+          circle.style.transition = 'opacity 0.3s ease';
+          circle.style.opacity = '0';
+          
+          setTimeout(() => {
+            isAnimating = false;
+            enterAnimationCompleted = false;
+            pendingReset = false;
+            circle.style.borderRadius = '50%';
+          }, 300);
+        }
+        
+        button.addEventListener('mouseenter', function(e) {
+          if (isAnimating) return;
+          isAnimating = true;
+          enterAnimationCompleted = false;
+          pendingReset = false;
+          
+          // Reset circle initial state
+          circle.style.transition = '';
+          circle.style.width = '20px';
+          circle.style.height = '20px';
+          circle.style.left = '50%';
+          circle.style.bottom = '0';
+          circle.style.transform = 'translate(-50%, 100%)';
+          circle.style.opacity = '1';
+          circle.style.zIndex = '10';
+          // Set the circle background color from options
+          circle.style.backgroundColor = options.circleColor;
+          
+          // First animation: move to center
+          setTimeout(() => {
+            circle.style.transition = 'transform 0.3s ease';
+            circle.style.transform = 'translate(-50%, -50%)';
+            circle.style.top = '50%';
+            
+            // Second animation: expand to cover the button
+            setTimeout(() => {
+              // Move behind the button text as it expands
+              circle.style.zIndex = '-1';
+              circle.style.transition = 'width 0.4s ease, height 0.4s ease, border-radius 0.4s ease';
+              circle.style.width = '100%';
+              circle.style.height = '100%';
+              circle.style.borderRadius = '0';
+              
+              // Change the button text color to the hover color
+              button.style.transition = 'color 0.4s ease';
+              button.style.color = options.hoverTextColor;
+              
+              // Mark the enter animation as completed after expansion finishes
+              setTimeout(completeEnterAnimation, 400);
+            }, 300);
+          }, 10);
+        });
+        
+        button.addEventListener('mouseleave', function() {
+          if (!enterAnimationCompleted) {
+            pendingReset = true;
+          } else {
+            resetAnimation();
+          }
+        });
+      });
+    }
+    
+    // Initialize animation for the primary buttons
+    initButtonAnimation('.primary_btnv2', {
+      defaultTextColor: 'var(--light-color)', // default text color
+      hoverTextColor: '#000',                // hover text color for primary buttons
+      circleColor: '#4BFFA5'                 // circle color for primary buttons (blue, for example)
+    });
+    
+    // Initialize animation for secondary buttons with different colors
+    initButtonAnimation('.animation__secondary', {
+      defaultTextColor: 'var(--secondary-light-color)', // default text color for secondary
+      hoverTextColor: '#4BFFA5',                           // hover text color for secondary buttons
+      circleColor: '#000'                            // circle color for secondary buttons (red, for example)
+    });
+  });
+  
