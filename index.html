@@ -11,9 +11,17 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.css">
     <link rel="stylesheet" href="style.css">
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script defer src="https://unpkg.com/@barba/core"></script>
+    <script defer src="app.js"></script>
     <title>Yassine boujalla</title>
 </head>
-<body>
+<body data-barba="wrapper">
+    <div class="transition-wrapper">
+        <div class="transition-text">
+            <span id="changing-text">Hello</span>
+        </div>
+    </div>
     <header class="container">
         <div class="menu_conatiner ">
             <div class="logo_cnt d-flex align-items-center justify-content-between">
@@ -27,7 +35,7 @@
             <nav class="nav_links">
                 <ul class="list-none">
                     <li class="magnatic__gn"><a href="/" >Home</a></li>
-                    <li class="magnatic__gn"><a href="" >Work</a></li>
+                    <li class="magnatic__gn"><a href="/works.html" >Work</a></li>
                     <li class="magnatic__gn"><a href="">Contact</a></li>
                     <!-- <li class="magnatic__gn"><a href="">About me</a></li> -->
                 </ul>
@@ -72,8 +80,8 @@
         <section class="Companys container pb-5 ">
             <div class="Companys_content p-4 mb-4">
                 <div class="row">
-                    <h2 class="col-lg-7 col-12 section_title">Rorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus.</h2>
-                    <p class="col-lg-5 col-md-9 col-12 section_breaf">Rorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus.</p>
+                    <h2 class="col-lg-8 col-12 section_title">Passionate about design, development, and interactive experiences, I craft digital solutions that blend creativity with functionality, making every project both engaging and impactful.</h2>
+                    <p class="col-lg-4 col-md-12 col-12 section_breaf">I help brands stand out in the digital era. Together, we set a new status quo—no-nonsense, always on the cutting edge.</p>
                 </div>
                 <div class="d-flex justify-content-between container align-items-end my-4">
                     <div>
@@ -177,9 +185,9 @@
         <div class="nav_content__mb">
             <span class="title_nav_mb ">Navigation</span>
             <ul class="primary_link_mb">
-                <li class="magnatic__gn"><a href="">Home</a></li>
+                <li class="magnatic__gn"><a href="/">Home</a></li>
                 <li class="magnatic__gn"><a href="/works.html">Work</a></li>
-                <li class="magnatic__gn"><a href="">About</a></li>
+                <!-- <li class="magnatic__gn"><a href="">About</a></li> -->
                 <li class="magnatic__gn"><a href="">Contact</a></li>
             </ul>
             <span class="title_nav_mb">Socials</span>
