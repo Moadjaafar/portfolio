@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", function () {
     
     // Set initial positions
     gsap.set(rightContainer, { x: -190 });
-    gsap.set(leftContainer, { x: -150 });
+    gsap.set(leftContainer, { x: -250 });
     
     // Scroll listener
     window.addEventListener("wheel", function(event) {
