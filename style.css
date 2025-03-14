@@ -417,7 +417,38 @@ header{
 .toggle_nav2:hover::after {
     background-color: #4BFFA5;
 }
-    
+.custem_border_supp {
+    padding-left: 15px;
+    border-left: 3px solid #661868;
+} 
+.prmary_link_pr {
+    color: #000;
+    text-align: center;
+    font-family: Montserrat;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: auto;
+    text-decoration-thickness: auto;
+    text-underline-offset: auto;
+    text-underline-position: from-font;
+    border-radius: 8px;
+    border: 1px solid rgba(119, 119, 125, 0.20);
+    background: #4BFFA5;
+    padding: 4px 8px;
+}
+.section_breaf_pr {
+    font-size: 20px;
+}
+.black_gb {
+    background-color: black !important;
+}
+.launch_bg {
+    background-color: #FF5233 !important;
+}
 /* ========================================================================== */
 /* Contact                                                                    */
 /* ========================================================================== */
@@ -729,6 +760,13 @@ footer p{
     height: 245px;
     display: flex;
 }
+.project_iteme__galryv3 {
+    padding: 30px;
+    background: #9EACAB;
+    width: 376px;
+    height: 245px;
+    display: flex;
+}
 .swipe_right__project {
     display: flex;
     gap: 40px;
@@ -738,6 +776,7 @@ footer p{
     transition: all .2s ease-out;
 
 }
+
 .prjects__cnt__project {
     flex-shrink: 0;
     overflow: hidden;
@@ -973,9 +1012,9 @@ main {
     top: 50%; /* Aligns the video to the top */
     left: 50%; /* Moves the video to the center */
     transform: translate(-50% , -50%); /* Adjusts position to be truly centered */
-    width: auto; /* Ensures natural width */
+    width: 90%;
     max-width: 95%; /* Prevents overflow */
-    height: 95%;
+    height: 96%;
     z-index: 1;
 }
 .phone__cnt__single .cover {
@@ -992,6 +1031,9 @@ main {
 }
 .splide__arrow--prev {
     left: -3em;
+}
+a {
+    color: #000;
 }
 /* .splide__arrow:disabled {
     display: none;
