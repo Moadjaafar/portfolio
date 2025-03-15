@@ -670,9 +670,9 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
 
     const projectNameMap = {
-        "/superauto.html": "SuperOccaz",
-        "/badr_hari.html": "Punch by Badr Hari",
-        "/launchx.html": "Launch X"
+        "/superauto": "SuperOccaz",
+        "/badr_hari": "Punch by Badr Hari",
+        "/launchx": "Launch X"
     };
 
     const mainContent = document.querySelector('main');
