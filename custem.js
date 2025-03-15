@@ -145,23 +145,60 @@ document.addEventListener("DOMContentLoaded", function () {
 });
   
 document.addEventListener("DOMContentLoaded", function () {
-    const rightContainer = document.querySelector(".swipe_right__project");
-    const leftContainer = document.querySelector(".swipe_left__project");
-    
-    // Set initial positions
-    gsap.set(rightContainer, { x: -190 });
-    gsap.set(leftContainer, { x: -250 });
-    
-    // Scroll listener
-    window.addEventListener("wheel", function(event) {
-      if (event.deltaY > 0) {
-        gsap.to(rightContainer, { x: "-=9", ease: "power2.out" });
-        gsap.to(leftContainer, { x: "+=9", ease: "power2.out" });
-      } else {
-        gsap.to(rightContainer, { x: "+=9", ease: "power2.out" });
-        gsap.to(leftContainer, { x: "-=9", ease: "power2.out" });
+  const rightContainer = document.querySelector(".swipe_right__project");
+  const leftContainer = document.querySelector(".swipe_left__project");
+  
+  // Make sure the elements exist
+  if (!rightContainer || !leftContainer) {
+      return;
+  }
+  
+  // Set initial positions
+  gsap.set(rightContainer, { x: -190 });
+  gsap.set(leftContainer, { x: -250 });
+  
+  // Create an animation state tracking variable
+  let isAnimationActive = false;
+  
+  // Create intersection observer
+  const observer = new IntersectionObserver((entries) => {
+      // Loop through the entries
+      entries.forEach(entry => {
+          if (entry.isIntersecting) {
+              // Element is now visible, enable the animation
+              isAnimationActive = true;
+              console.log("Project containers are now visible, enabling scroll animation");
+          } else {
+              // Element is no longer visible, disable the animation
+              isAnimationActive = false;
+              console.log("Project containers no longer visible, disabling scroll animation");
+          }
+      });
+  }, {
+      // Options for the observer
+      threshold: 0.2, // Element is considered visible when 20% is in viewport
+      rootMargin: "0px" // No margin
+  });
+  
+  // We only need to observe one container to know if the section is visible
+  // Since they're likely in the same area of the page
+  observer.observe(rightContainer);
+  
+  // Scroll listener for the wheel event
+  window.addEventListener("wheel", function(event) {
+      // Only process the animation if our containers are visible
+      if (isAnimationActive) {
+          if (event.deltaY > 0) {
+              // Scrolling down
+              gsap.to(rightContainer, { x: "-=9", ease: "power2.out" });
+              gsap.to(leftContainer, { x: "+=9", ease: "power2.out" });
+          } else {
+              // Scrolling up
+              gsap.to(rightContainer, { x: "+=9", ease: "power2.out" });
+              gsap.to(leftContainer, { x: "-=9", ease: "power2.out" });
+          }
       }
-    });
+  });
 });
   
 // Get all toggle buttons
@@ -363,6 +400,13 @@ document.addEventListener('DOMContentLoaded', function () {
         perPage: 3,
         perMove: 1,
         gap: '5rem',
+        autoplay: true, // Enable autoplay
+        interval: 3000, // Autoplay speed in milliseconds
+        rewind: true, // Go back to the first slide after the last
+        speed: 800, // Slide transition speed
+        snap: true, // Snap slides into place
+        easing: 'ease', // Easing effect for transition
+        pagination: false, // Hides pagination dots
         breakpoints: {
             1200: { perPage: 3, gap: '4rem' },
             992:  { perPage: 2, gap: '3rem' },
@@ -612,4 +656,123 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   
 
+  document.addEventListener("DOMContentLoaded", function () {
+    const currentPath = window.location.pathname;
+
+    const animationPages = ["/", "/index.html"];
+    const shouldRunIntroAnimation = animationPages.some(page => 
+        currentPath === page || currentPath.endsWith(page)
+    );
+
+    const introTextArray = [
+        "Hello", "Bonjour", "Hola", "Ciao", "こんにちは",
+        "Привет", "你好", "안녕하세요", "Olá", "مرحبا"
+    ];
+
+    const projectNameMap = {
+        "/superauto.html": "SuperOccaz",
+        "/badr_hari.html": "Punch by Badr Hari",
+        "/launchx.html": "Launch X"
+    };
+
+    const mainContent = document.querySelector('main');
+    const transitionWrapper = document.querySelector(".transition-wrapper");
+    const changingText = document.getElementById("changing-text");
+
+    if (typeof gsap === 'undefined') {
+        console.error("GSAP is not loaded. Please include the GSAP library.");
+        return;
+    }
+
+    // if (shouldRunIntroAnimation) {
+    //     runIntroAnimation();
+    // } else if (projectNameMap[currentPath]) {
+
+    //     runProjectIntroAnimation(projectNameMap[currentPath]);
+    // }
+    if (shouldRunIntroAnimation) {
+      runIntroAnimation();
+  } else {
+      const matchedProject = Object.keys(projectNameMap).find(path => currentPath.endsWith(path));
+      if (matchedProject) {
+          runProjectIntroAnimation(projectNameMap[matchedProject]);
+      }
+  }
+
+    function runIntroAnimation() {
+        let textIndex = 0;
+        document.body.classList.add('no-scroll');
+
+        gsap.set(mainContent, { opacity: 0, y: 50, scale: 0.95 });
+        gsap.to(transitionWrapper, {
+            opacity: 1,
+            duration: 0.5,
+            ease: "power1.inOut",
+            onComplete: startIntroTextAnimation
+        });
+
+        async function startIntroTextAnimation() {
+            for (let i = 0; i < 5; i++) {
+                await typeText(changingText, introTextArray[textIndex]);
+                textIndex = (textIndex + 1) % introTextArray.length;
+                await new Promise(resolve => setTimeout(resolve, 200));
+            }
+            gsap.to(transitionWrapper, {
+                opacity: 0,
+                duration: 0.5,
+                ease: "power1.inOut",
+                onComplete: showMainContent
+            });
+        }
+    }
+
+    function runProjectIntroAnimation(projectName) {
+        document.body.classList.add('no-scroll');
+        gsap.set(mainContent, { opacity: 0, y: 50, scale: 0.95 });
+        gsap.to(transitionWrapper, {
+            opacity: 1,
+            duration: 0.5,
+            ease: "power1.inOut",
+            onComplete: async () => {
+                await typeText(changingText, projectName);
+                await new Promise(resolve => setTimeout(resolve, 600));
+                gsap.to(transitionWrapper, {
+                    opacity: 0,
+                    duration: 0.5,
+                    ease: "power1.inOut",
+                    onComplete: showMainContent
+                });
+            }
+        });
+    }
+
+    function showMainContent() {
+        gsap.to(mainContent, {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.6,
+            ease: "power2.out",
+            clearProps: "all",
+            onComplete: () => document.body.classList.remove('no-scroll')
+        });
+    }
+
+    async function typeText(element, text) {
+        return new Promise(resolve => {
+            element.textContent = '';
+            let i = 0;
+            function type() {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, 50);
+                } else {
+                    setTimeout(resolve, 300);
+                }
+            }
+            type();
+        });
+    }
+});
 

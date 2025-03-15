@@ -33,6 +33,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
 }
 
 
@@ -46,29 +47,37 @@ body {
 
 a {
 text-decoration: none;
+
 }
   /* Works on Chrome, Edge, Safari */
 ::-webkit-scrollbar {
-    width: 10px; /* Scrollbar width */
+    width: 5px; /* Scrollbar width */
 }
 
 /* Track (background of scrollbar) */
 ::-webkit-scrollbar-track {
     background: #000000; /* Change to desired color */
     border-radius: 10px; 
+    width: 5px; /* Scrollbar width */
+
 }
 
 /* Scrollbar thumb (the moving part) */
 ::-webkit-scrollbar-thumb {
     background: #4BFFA5; /* Change to desired color */
     border-radius: 10px;
+    width: 5px; /* Scrollbar width */
+
 }
+
 
 /* Scrollbar thumb on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: #00cc88; /* Darker color on hover */
 }
-
+.no-scroll {
+    overflow: hidden;
+  }
 /* For Firefox */
 * {
     scrollbar-color: #4BFFA5 #000000; /* thumb color | track color */
@@ -1044,7 +1053,10 @@ a {
 .splide__arrow svg {
     fill: var(--daimonde-green);
 }
-
+.splide__arrow:disabled {
+    opacity: .3;
+    display: none;
+}
 .big__screen__cnt__pc {
     position: relative;
 }
@@ -1247,7 +1259,7 @@ a {
     justify-content: center;
     align-items: center;
     pointer-events: none;
-    z-index: 100;
+    z-index: 1000;
     opacity: 0;
     background: #1C1D20;
 }
