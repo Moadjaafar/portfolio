@@ -51,8 +51,25 @@
                     <div class="col-lg-7 col-md-12 d-flex align-items-center">
                         <h1>web <span>&</span> <br> <span id="typed-text"></span></h1>
                     </div>
-                    <div class="col-lg-5 col-12 d-lg-flex d-none p-lg-0">
+                    <!-- <div class="col-lg-5 col-12 d-lg-flex d-none p-lg-0">
                         <img src="assets/images/hero_img.png" class="w-100" alt="">
+                    </div> -->
+                    <div class="col-lg-5 col-12 d-lg-flex d-none p-lg-0">
+                        <div class="pixelated-image-card" data-pixelated-image-reveal>
+                            <!-- Current image -->
+                            <div class="pixelated-image-card__default">
+                            <img src="assets/images/hero_img.png" class="w-100" alt="">
+                            </div>
+                            <!-- Next image (hidden until transition) -->
+                            <div data-pixelated-image-reveal-active class="pixelated-image-card__active">
+                            <img src="" class="w-100" alt="">
+                            </div>
+                            <!-- Pixel grid overlay -->
+                            <div data-pixelated-image-reveal-grid class="pixelated-image-card__pixels">
+                            <!-- The pixels will be generated dynamically -->
+                            <div class="pixelated-image-card__pixel"></div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-lg-7 col-md-12">
                         <div>

@@ -1311,3 +1311,40 @@ a {
     border-radius: 50%;
     opacity: 0.3;
 }
+
+  
+  .pixelated-image-card {
+    background-color: #222;
+    border-radius: 0.5em;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 2 / 1.3;
+  }
+  
+  .pixelated-image-card__default, 
+  .pixelated-image-card__active, 
+  .pixelated-image-card__pixels {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  .pixelated-image-card__active {
+    display: none;
+  }
+  
+  .pixelated-image-card__pixel {
+    background-color: currentColor;
+    width: 100%;
+    height: 100%;
+    display: none;
+    position: absolute;
+  }
+.pixelated-image-card__default img {
+    width: 100% !important;
+    height: 100%;
+    object-fit: fill;
+}

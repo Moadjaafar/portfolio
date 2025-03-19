@@ -659,7 +659,7 @@ document.addEventListener('DOMContentLoaded', function() {
   document.addEventListener("DOMContentLoaded", function () {
     const currentPath = window.location.pathname;
 
-    const animationPages = ["/", "/index.html"];
+    const animationPages = ["/", "/indexX.html"];
     const shouldRunIntroAnimation = animationPages.some(page => 
         currentPath === page || currentPath.endsWith(page)
     );
@@ -776,3 +776,91 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  // Array of image URLs (update these to your paths)
+  const images = [
+    'assets/images/hero_img.png',
+    'assets/images/mercides.png',
+    'assets/images/project1.png',
+    'assets/images/launchx_pr.png'
+  ];
+  
+  let currentIndex = 0;
+  
+  // Select the card and its elements
+  const card = document.querySelector('[data-pixelated-image-reveal]');
+  const defaultContainer = card.querySelector('.pixelated-image-card__default img');
+  const activeContainer = card.querySelector('.pixelated-image-card__active img');
+  const pixelGrid = card.querySelector('[data-pixelated-image-reveal-grid]');
+  
+  const animationStepDuration = 0.3; // total duration for pixel animation
+  const gridSize = 6; // 7x7 grid
+  const pixelSize = 100 / gridSize; // percentage size of each pixel
+  
+  // Generate the pixel grid dynamically
+  pixelGrid.innerHTML = '';
+  for (let row = 0; row < gridSize; row++) {
+    for (let col = 0; col < gridSize; col++) {
+      const pixel = document.createElement('div');
+      pixel.classList.add('pixelated-image-card__pixel');
+      pixel.style.width = `${pixelSize}%`;
+      pixel.style.height = `${pixelSize}%`;
+      pixel.style.left = `${col * pixelSize}%`;
+      pixel.style.top = `${row * pixelSize}%`;
+      pixelGrid.appendChild(pixel);
+    }
+  }
+  const pixels = pixelGrid.querySelectorAll('.pixelated-image-card__pixel');
+  const totalPixels = pixels.length;
+  const staggerDuration = animationStepDuration / totalPixels;
+  
+  // Function to run the pixelated transition to the next image
+  function animateTransition(nextIndex) {
+    const transitionColors = ['#000', '#4BFFA5']; // Add any colors you want
+    const randomColor = transitionColors[Math.floor(Math.random() * transitionColors.length)];
+    
+    // Change all pixel colors before animation
+    pixels.forEach(pixel => {
+        pixel.style.backgroundColor = randomColor;
+    });
+
+    // Existing animation logic
+    gsap.killTweensOf(pixels);
+    gsap.set(pixels, { display: 'none' });
+
+    gsap.to(pixels, {
+        display: 'block',
+        duration: 0,
+        stagger: {
+            each: staggerDuration,
+            from: 'random'
+        }
+    });
+
+    gsap.delayedCall(animationStepDuration, () => {
+        defaultContainer.src = images[nextIndex];
+    });
+
+    gsap.to(pixels, {
+        display: 'none',
+        duration: 0,
+        delay: animationStepDuration,
+        stagger: {
+            each: staggerDuration,
+            from: 'random'
+        }
+    });
+}
+
+  
+  // Set the initial image
+  defaultContainer.src = images[currentIndex];
+  
+  // Automatically cycle images every 5 seconds
+  setInterval(() => {
+    currentIndex = (currentIndex + 1) % images.length;
+    animateTransition(currentIndex);
+  }, 5000);
+});
