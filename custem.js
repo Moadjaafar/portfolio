@@ -659,7 +659,7 @@ document.addEventListener('DOMContentLoaded', function() {
   document.addEventListener("DOMContentLoaded", function () {
     const currentPath = window.location.pathname;
 
-    const animationPages = ["/", "/indexX.html"];
+    const animationPages = ["/", "/index.html"];
     const shouldRunIntroAnimation = animationPages.some(page => 
         currentPath === page || currentPath.endsWith(page)
     );
